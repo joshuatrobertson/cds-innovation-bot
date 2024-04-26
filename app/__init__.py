@@ -1,9 +1,10 @@
 from flask import Flask
 from app.config import config
-from app.routes import main_bp  # Ensure this matches the file where 'main_bp' is defined
+from app.routes import init_routes
+
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(config)
-    app.register_blueprint(main_bp)  # Register the blueprint
+    init_routes(app)
     return app

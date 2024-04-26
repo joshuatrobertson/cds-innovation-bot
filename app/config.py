@@ -1,15 +1,23 @@
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class Config:
+    # Flask
     FLASK_APP = 'app.py'
     FLASK_ENV = os.environ.get('FLASK_ENV', 'development')
 
-    # Box API settings
-    BOX_CLIENT_ID = os.environ.get('BOX_CLIENT_ID')
-    BOX_CLIENT_SECRET = os.environ.get('BOX_CLIENT_SECRET')
-    BOX_REDIRECT_URI = os.environ.get('BOX_REDIRECT_URI')
-    BOX_JWT_CONFIG = os.environ.get('BOX_JWT_CONFIG', '/path/to/your/config.json')
+    # Slack
+    SLACK_CLIENT_ID = os.environ.get('SLACK_CLIENT_ID')
+    SLACK_SECRET = os.environ.get('SLACK_SECRET')
+    SLACK_SIGNING_SECRET = os.environ.get('SLACK_SIGNING_SECRET')
+
+    # Monday
+    MONDAY_KEY = os.environ.get('MONDAY_KEY')
+    MONDAY_BOARD_ID = os.environ.get('MONDAY_BOARD_ID')
+    MONDAY_GROUP_ID = os.environ.get('MONDAY_GROUP_ID')
 
 
 # Instance of config to be used across the app
