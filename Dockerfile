@@ -5,13 +5,10 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # Copy the requirements file into the container
-COPY requirements.txt .
+ADD . /app
 
 # Install the dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the rest of the application code into the container
-COPY . .
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 # Expose the port that the app runs on
 EXPOSE 8000
@@ -20,4 +17,4 @@ EXPOSE 8000
 ENV FLASK_APP=wsgi.py
 
 # Command to run the app using Gunicorn
-CMD ["gunicorn", "-b", "0.0.0.0:8000", "wsgi:app"]
+CMD ["gunicorn", "-b", ":8080", "app:app"]
