@@ -67,8 +67,8 @@ def handle_explanation():
             "text": metadata['idea_text'],
             "status": {"label": "New Idea"},
             "date4": {"date": datetime.datetime.now().strftime("%Y-%m-%d")},
-            "name": user_name,
-            "text__1": explanation
+            "text__1": user_name,
+            "text1__1": explanation
         }
         monday_manager.create_task(config.MONDAY_BOARD_ID, config.MONDAY_GROUP_ID, metadata['idea_text'],
                                    column_values)

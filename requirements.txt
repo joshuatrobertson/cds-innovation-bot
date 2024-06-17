@@ -7,4 +7,3 @@ requests
 redis
 pymongo
 apscheduler
-gunicorn
