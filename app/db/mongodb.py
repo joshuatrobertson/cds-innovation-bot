@@ -3,13 +3,13 @@ from datetime import timedelta
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 import logging
-
 from app import config
 
 
 # Function to get MongoDB client
 def get_mongo_client(uri=config.MONGO_URI):
     try:
+        logging.debug(f"Attempting to connect to MongoDB with URI: {uri}")
         client = MongoClient(uri)
         client.admin.command('ismaster')
         logging.info("Successfully connected to MongoDB")
