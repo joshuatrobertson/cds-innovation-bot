@@ -19,4 +19,4 @@ COPY . /app
 ENV NAME World
 
 # Command to run the app using Gunicorn
-CMD ["gunicorn", "-b", ":5000", "wsgi:app"]
+CMD ["gunicorn", "-b", ":3000", "wsgi:app"]
