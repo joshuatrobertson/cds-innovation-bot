@@ -1,2 +1,4 @@
 Create a leaderboard
 Tally who has added an idea
+
+Try add through email, else add username

@@ -1,6 +1,7 @@
+import datetime
 import requests
 import json
-from app import config
+from app.config import config
 
 
 class MondayManager:
@@ -48,3 +49,16 @@ class MondayManager:
         except requests.RequestException as e:
             print(f"Failed to create item in Monday.com: {e}")
             return None
+
+    def post_idea_to_monday(self, user_name, idea_text):
+        date = datetime.datetime.now().strftime("%Y-%m-%d")
+        column_values = {
+            # First row is column id's
+            "text": idea_text,
+            "status": {"label": "New Idea"},
+            "date4": {"date": date},
+            "text__1": user_name
+        }
+        result = self.create_task(config.config.MONDAY_BOARD_ID, config.config.MONDAY_GROUP_ID, idea_text, column_values)
+        return result
+
