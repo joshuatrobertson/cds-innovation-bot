@@ -3,7 +3,8 @@ services:
   flask-app:
     build: .
     ports:
-      - "5000:5000"
+      - "3000:3000"
+    command: python wsgi.py
     env_file:
       - .env
     volumes:
