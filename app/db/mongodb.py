@@ -1,6 +1,5 @@
 import time
-from datetime import datetime, timedelta
-
+from datetime import timedelta
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 import logging
@@ -13,9 +12,10 @@ def get_mongo_client(uri=config.MONGO_URI):
     try:
         client = MongoClient(uri)
         client.admin.command('ismaster')
+        logging.info("Successfully connected to MongoDB")
         return client
-    except ConnectionFailure:
-        logging.error("Server not available")
+    except ConnectionFailure as e:
+        logging.error(f"Server not available: {e}")
         return None
 
 
@@ -26,6 +26,7 @@ def add_idea(db_name, idea_data):
         db = client[db_name]
         db.ideas.insert_one(idea_data)
         client.close()
+        logging.info("Idea added to MongoDB")
     else:
         logging.error("Failed to connect to MongoDB")
 
@@ -35,9 +36,9 @@ def get_ideas_leaderboard_for_month(db_name):
     client = get_mongo_client()
     if client is not None:
         db = client[db_name]
-        one_month_ago = time.time() - timedelta(days=30).total_seconds()  # Get seconds since epoch 30 days ago
+        one_month_ago = time.time() - timedelta(days=30).total_seconds()
         pipeline = [
-            {"$match": {"timestamp": {"$gte": one_month_ago}}},  # Compare as float
+            {"$match": {"timestamp": {"$gte": one_month_ago}}},
             {"$group": {
                 "_id": "$user_name",
                 "count": {"$sum": 1}
@@ -46,9 +47,8 @@ def get_ideas_leaderboard_for_month(db_name):
         ]
         results = list(db.ideas.aggregate(pipeline))
         client.close()
+        logging.info("Successfully retrieved leaderboard from MongoDB")
         return results
     else:
         logging.error("Failed to connect to MongoDB")
         return []
-
-
