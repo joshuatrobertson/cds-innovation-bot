@@ -2,7 +2,6 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-<<<<<<< HEAD
 # Copy requirements.txt and install dependencies
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
@@ -13,7 +12,7 @@ COPY app /app/app/
 
 # Command to run the application
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "wsgi:app"]
-=======
+
 # Copy requirements.txt first to leverage Docker cache
 COPY requirements.txt /app/
 
@@ -26,4 +25,3 @@ COPY app /app/app/
 
 # Run the application
 CMD ["python", "wsgi.py"]
->>>>>>> e9ff8b23318bde21990517aff93799693ee49a79
