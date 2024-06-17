@@ -40,6 +40,6 @@ def scheduled_leaderboard_post():
     post_leaderboard_to_channel(leaderboard_data)
 
 
-scheduler.add_job(scheduled_leaderboard_post, 'cron', minute='*/120')
+scheduler.add_job(scheduled_leaderboard_post, 'cron', minute='*/2')
 
 atexit.register(lambda: scheduler.shutdown())
