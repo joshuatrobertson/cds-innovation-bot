@@ -1,27 +1,20 @@
+# Use an official Python runtime as a parent image
 FROM python:3.9-slim
 
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy requirements.txt and install dependencies
+# Copy the requirements file into the container
 COPY requirements.txt /app/
+
+# Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the application files
-COPY wsgi.py /app/
-COPY app /app/app/
+# Copy the rest of the application code
+COPY . /app
 
-# Command to run the application
+# Make port 8000 available to the world outside this container
+EXPOSE 8000
+
+# Run gunicorn server
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "wsgi:app"]
-
-# Copy requirements.txt first to leverage Docker cache
-COPY requirements.txt /app/
-
-# Install dependencies
-RUN pip install -r requirements.txt
-
-# Copy application files
-COPY wsgi.py /app/
-COPY app /app/app/
-
-# Run the application
-CMD ["python", "wsgi.py"]
