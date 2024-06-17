@@ -31,7 +31,7 @@ def scheduled_leaderboard_post():
 
 
 # Scheduling the job
-scheduler.add_job(scheduled_leaderboard_post, 'cron', hour='30')
+scheduler.add_job(scheduled_leaderboard_post, 'cron', hour='13')
 
 # Ensure the scheduler is shut down properly when the app exits
 atexit.register(lambda: scheduler.shutdown())
