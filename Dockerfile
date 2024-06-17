@@ -17,4 +17,4 @@ EXPOSE 8000
 ENV FLASK_APP=wsgi.py
 
 # Command to run the app using Gunicorn
-CMD ["gunicorn", "-b", ":8080", "app:app"]
+CMD ["gunicorn", "-b", ":8080", "app"]
