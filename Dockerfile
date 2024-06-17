@@ -17,4 +17,4 @@ EXPOSE 5000
 ENV FLASK_APP=wsgi.py
 
 # Run wsgi.py when the container launches
-CMD ["python", "wsgi.py"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "wsgi:app"]
