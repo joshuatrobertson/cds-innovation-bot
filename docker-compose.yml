@@ -3,9 +3,8 @@ services:
   flask-app:
     build: .
     ports:
-      - "5000:5000"
+      - "5000:5000"  # Adjust port mapping if needed (currently exposes 5000 on host)
     env_file:
       - .env
-    command: python app.py
     volumes:
       - .:/app
