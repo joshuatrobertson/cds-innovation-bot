@@ -4,6 +4,6 @@ python-docx
 monday
 Flask-Session
 requests
-redis
 pymongo
 apscheduler
+gunicorn
