@@ -1,11 +1,10 @@
-version: '3.9'
+version: '3.8'
+
 services:
-  flask-app:
+  web:
     build: .
     ports:
       - "5000:5000"
-    env_file:
-      - .env
-    command: python app.py
-    volumes:
-      - .:/app
+    environment:
+      FLASK_APP: wsgi.py
+    command: python wsgi.py

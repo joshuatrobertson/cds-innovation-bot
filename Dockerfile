@@ -16,5 +16,5 @@ EXPOSE 5000
 # Define environment variable
 ENV FLASK_APP=wsgi.py
 
-# Run app.py when the container launches
+# Run wsgi.py when the container launches
 CMD ["python", "wsgi.py"]
