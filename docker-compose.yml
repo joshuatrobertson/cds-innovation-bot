@@ -7,6 +7,7 @@ services:
       - "5000:5000"
     environment:
       FLASK_ENV: production
+      FLASK_SECRET_KEY: '\xba\xaa\xeei\x85\x1a\x9a\xdd\xf5\xf1\x91\x9dm(\xee\x9d\x9d\xd6\t\x87o\xad,7'
     volumes:
       - .:/app
     command: gunicorn -w 4 -b 0.0.0.0:5000 wsgi:app
