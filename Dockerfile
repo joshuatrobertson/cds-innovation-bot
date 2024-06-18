@@ -1,20 +1,20 @@
-# Use the official slim Python image from the Docker Hub
-FROM python:3.9-slim
+# Use the official Python image from the Docker Hub
+FROM python:3.10-slim
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the requirements file into the container at /app/
-COPY requirements.txt /app/
+# Copy the requirements file into the container
+COPY requirements.txt .
 
-# Install the dependencies specified in the requirements file
+# Install the dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the current directory contents into the container at /app/
-COPY . /app
+# Copy the rest of the application code into the container
+COPY . .
 
-# Expose port 8000 to the outside world
-EXPOSE 8080
+# Expose the port that the app runs on
+EXPOSE 5000
 
-# Define the command to run the application using gunicorn
-CMD ["gunicorn", "-b", ":8000", "wsgi:app"]
+# Run the application
+CMD ["python", "wsgi.py"]
