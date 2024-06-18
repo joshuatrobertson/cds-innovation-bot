@@ -4,7 +4,7 @@ services:
     build: .
     ports:
       - "5000:5000"
-    command: python wsgi.py
+    command: python app.py
     env_file:
       - .env
     volumes:
